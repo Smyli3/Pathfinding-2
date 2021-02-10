@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 1}
+  m_AmbientSkyColor: {r: 0.35493988, g: 0.35493988, b: 0.35493988, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 2
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6ac6a42d47f4d7249a11b33a16560f7d, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -201,9 +201,11 @@ MonoBehaviour:
   currentMode: 0
   modeSwitch: 113
   modeText: {fileID: 1846713079}
-  x: 4
-  y: 4
-  z: 4
+  placementMode: {r: 1, g: 1, b: 1, a: 1}
+  movementMode: {r: 0.80139136, g: 0.5424528, b: 1, a: 1}
+  x: 10
+  y: 10
+  z: 10
   platformRef: {fileID: 2996762592325334026, guid: 5e55d78c1b0511d41801603574153295,
     type: 3}
   platformPar: {fileID: 1309464610}
@@ -313,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba9d4d7324d2611428f89c0e3d414de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 100
+  rotationSpeed: 75
   rotationBounds: 90
   left: 100
   right: 97
@@ -508,7 +510,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0.40528917, b: 0.5, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -568,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSpeed: 100
-  maxZoom: 15
+  maxZoom: 30
 --- !u!1 &1234953012
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +830,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5, y: -7.5}
+  m_AnchoredPosition: {x: -12.5, y: -10}
   m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1846713079

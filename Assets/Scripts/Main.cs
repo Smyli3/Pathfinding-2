@@ -14,8 +14,10 @@ public class Main : MonoBehaviour
     // The key that will be used to switch between modes
     public KeyCode modeSwitch;
 
-    // The text that will display the current mode
+    // The text that will display the current mode and its colors
     public Text modeText;
+    public Color placementMode;
+    public Color movementMode;
 
     // Grid
     public Node[,,] grid;
@@ -30,11 +32,13 @@ public class Main : MonoBehaviour
     public GameObject platformPar;
 
     Placement placement;
+    Removal removal;
 
     // Game start - used to display the initial mode when the game runs and initialize grid
     private void Awake()
     {
         placement = GetComponent<Placement>();
+        removal = GetComponent<Removal>();
         grid = new Node[x, y, z];
         CreatePlatform();
         UpdateMode();
@@ -74,12 +78,12 @@ public class Main : MonoBehaviour
         {
             case mode.place:
                 modeText.text = "Placement Mode";
-                modeText.color = new Color(1, 1, 0);
+                modeText.color = placementMode;
                 break;
 
             case mode.move:
                 modeText.text = "Movement Mode";
-                modeText.color = new Color(0, 1, 1);
+                modeText.color = movementMode;
                 break;
         }
     }
@@ -91,15 +95,18 @@ public class Main : MonoBehaviour
         {
             case mode.place:
                 placement.enabled = true;
+                removal.enabled = true;
                 break;
 
             case mode.move:
                 placement.morphBotHover.SetActive(false);
                 placement.enabled = false;
+                removal.enabled = false;
                 break;
         }
     }
 
+    // Creates beginning MorphBots platform
     private void CreatePlatform()
     {
         for (int a = 0; a < x; a++)
