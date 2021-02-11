@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 189195451}
   - component: {fileID: 189195450}
   - component: {fileID: 189195453}
+  - component: {fileID: 189195454}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -203,9 +204,9 @@ MonoBehaviour:
   modeText: {fileID: 1846713079}
   placementMode: {r: 1, g: 1, b: 1, a: 1}
   movementMode: {r: 0.80139136, g: 0.5424528, b: 1, a: 1}
-  x: 10
-  y: 10
-  z: 10
+  x: 8
+  y: 5
+  z: 8
   platformRef: {fileID: 2996762592325334026, guid: 5e55d78c1b0511d41801603574153295,
     type: 3}
   platformPar: {fileID: 1309464610}
@@ -271,6 +272,25 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   maxRaycastDistance: 25
+--- !u!114 &189195454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189195447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87d969088115d1478407ad194d8b06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hover: {fileID: 2100000, guid: e78352e6efa22454880e95ae808e63a1, type: 2}
+  defaultMat: {fileID: 2100000, guid: 4f4088cfb3dd97a40b92795f860d3f66, type: 2}
+  maxDistance: 25
+  gameLayers:
+    serializedVersion: 2
+    m_Bits: 768
+  hoverMorphBot: {fileID: 0}
 --- !u!1 &603636031
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,11 +14,13 @@ public class Placement : MonoBehaviour
     RaycastHit raycastHit;
     Rulesets rulesets;
     Functions functions;
+    Main main;
 
     private void Awake()
     {
         rulesets = GetComponent<Rulesets>();
         functions = GetComponent<Functions>();
+        main = GetComponent<Main>();
         morphBotHover = Instantiate(morphBotHoverRef, new Vector3(0, 0, 0), Quaternion.identity);
         morphBotHover.name = "MorphBot Highlight";
     }
@@ -65,18 +67,16 @@ public class Placement : MonoBehaviour
 
             if (Physics.Raycast(ray, out raycastHit, maxRaycastDistance, gameLayers))
             {
-                Vector3 location = functions.Vector3ToGrid(raycastHit);
+                Vector3Int location = functions.Vector3ToGrid(raycastHit);
 
-                if (rulesets.WithinArray(Vector3Int.RoundToInt(location)))
+                if (rulesets.WithinArray(location))
                 {
                     GameObject morphBot = Instantiate(morphBotRef, location, Quaternion.identity);
                     morphBot.transform.SetParent(morphBotsPar.transform);
                     morphBot.name = "MorphBot(" + location.x + ", " + location.y + ", " + location.z + ")";
+                    main.grid[location.x, location.y, location.z].walkable = false;
                 }
             }
-
-
-
         }
     }
 }

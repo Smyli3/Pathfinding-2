@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Functions : MonoBehaviour
 {
-    public Vector3 Vector3ToGrid(RaycastHit raycastHit)
+    public Vector3Int Vector3ToGrid(RaycastHit raycastHit)
     {
         Vector3 rawPosition = raycastHit.point - raycastHit.transform.position;
         Vector3 truePosition = new Vector3(0, 0, 0);
@@ -40,6 +40,6 @@ public class Functions : MonoBehaviour
         }
 
         truePosition += raycastHit.transform.position;
-        return truePosition;
+        return Vector3Int.RoundToInt(truePosition);
     }
 }

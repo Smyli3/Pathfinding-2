@@ -33,14 +33,16 @@ public class Main : MonoBehaviour
 
     Placement placement;
     Removal removal;
+    Selection selection;
 
     // Game start - used to display the initial mode when the game runs and initialize grid
     private void Awake()
     {
         placement = GetComponent<Placement>();
         removal = GetComponent<Removal>();
-        grid = new Node[x, y, z];
+        selection = GetComponent<Selection>();
         CreatePlatform();
+        CreateGrid();
         UpdateMode();
     }
 
@@ -96,12 +98,19 @@ public class Main : MonoBehaviour
             case mode.place:
                 placement.enabled = true;
                 removal.enabled = true;
+                if (selection.hoverMorphBot != null)
+                {
+                    selection.UnselectBlock();
+                    selection.hoverMorphBot = null;
+                }
+                selection.enabled = false;
                 break;
 
             case mode.move:
                 placement.morphBotHover.SetActive(false);
                 placement.enabled = false;
                 removal.enabled = false;
+                selection.enabled = true;
                 break;
         }
     }
@@ -116,6 +125,22 @@ public class Main : MonoBehaviour
                 GameObject platform = Instantiate(platformRef, new Vector3(a, -1, b), Quaternion.identity);
                 platform.name = "Platform(" + a + ", -1, " + b + ")";
                 platform.transform.SetParent(platformPar.transform);
+            }
+        }
+    }
+
+    private void CreateGrid()
+    {
+        grid = new Node[x, y, z];
+
+        for (int a = 0; a < x; a++)
+        {
+            for (int b = 0; b < y; b++)
+            {
+                for (int c = 0; c < z; c++)
+                {
+                    grid[a, b, c] = new Node(new Vector3Int(a, b, c), true);
+                }
             }
         }
     }
