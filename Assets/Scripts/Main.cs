@@ -34,6 +34,7 @@ public class Main : MonoBehaviour
     Placement placement;
     Removal removal;
     Selection selection;
+    Movement movement;
 
     // Game start - used to display the initial mode when the game runs and initialize grid
     private void Awake()
@@ -41,6 +42,7 @@ public class Main : MonoBehaviour
         placement = GetComponent<Placement>();
         removal = GetComponent<Removal>();
         selection = GetComponent<Selection>();
+        movement = GetComponent<Movement>();
         CreatePlatform();
         CreateGrid();
         UpdateMode();
@@ -98,12 +100,21 @@ public class Main : MonoBehaviour
             case mode.place:
                 placement.enabled = true;
                 removal.enabled = true;
+
                 if (selection.hoverMorphBot != null)
                 {
                     selection.UnselectBlock();
                     selection.hoverMorphBot = null;
                 }
+
                 selection.enabled = false;
+
+                if (movement.currentMorphBot != null)
+                {
+                    movement.currentMorphBot = null;
+                }
+
+                movement.enabled = false;
                 break;
 
             case mode.move:
@@ -111,6 +122,7 @@ public class Main : MonoBehaviour
                 placement.enabled = false;
                 removal.enabled = false;
                 selection.enabled = true;
+                movement.enabled = true;
                 break;
         }
     }
@@ -128,7 +140,8 @@ public class Main : MonoBehaviour
             }
         }
     }
-
+    
+    // Creates beginning MorphBots grid using Node class
     private void CreateGrid()
     {
         grid = new Node[x, y, z];
