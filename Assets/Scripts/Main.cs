@@ -36,6 +36,12 @@ public class Main : MonoBehaviour
     Selection selection;
     Movement movement;
 
+    // Draws a wired 3D cube in scene view that shows the size of the array
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(new Vector3(x / 2 - 0.5f, y / 2, z / 2 - 0.5f), new Vector3(x, y, z));
+    }
+
     // Game start - used to display the initial mode when the game runs and initialize grid
     private void Awake()
     {

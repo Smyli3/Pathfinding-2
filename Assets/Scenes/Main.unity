@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 189195453}
   - component: {fileID: 189195454}
   - component: {fileID: 189195455}
+  - component: {fileID: 189195456}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -308,6 +309,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   maxDistance: 25
+  currentMorphBot: {fileID: 0}
+--- !u!114 &189195456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189195447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dafe5f233dbf824d907111d2bcfb0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &603636031
 GameObject:
   m_ObjectHideFlags: 0

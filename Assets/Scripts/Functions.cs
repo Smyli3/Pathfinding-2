@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Functions : MonoBehaviour
+
 {
+    Main main;
+    Rulesets rulesets;
+
+    private void Awake()
+    {
+        main = GetComponent<Main>();
+        rulesets = GetComponent<Rulesets>();
+    }
+
     public Vector3Int Vector3ToGrid(RaycastHit raycastHit)
     {
         Vector3 rawPosition = raycastHit.point - raycastHit.transform.position;
@@ -41,5 +51,94 @@ public class Functions : MonoBehaviour
 
         truePosition += raycastHit.transform.position;
         return Vector3Int.RoundToInt(truePosition);
+    }
+
+    public List<Node> GetNeighbors(Node currentNode)
+    {
+        List<Node> Neighbors = new List<Node>();
+        int x = currentNode.position.x;
+        int y = currentNode.position.y;
+        int z = currentNode.position.z;
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.right) && main.grid[x + 1, y, z].walkable == true)
+        {
+            Neighbors.Add(main.grid[x + 1, y, z]);
+        }
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.left) && main.grid[x - 1, y, z].walkable == true)
+        {
+            Neighbors.Add(main.grid[x - 1, y, z]);
+        }
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.RoundToInt(Vector3.forward)) && main.grid[x, y, z + 1].walkable == true)
+        {
+            Neighbors.Add(main.grid[x, y, z + 1]);
+        }
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.RoundToInt(Vector3.back)) && main.grid[x, y, z - 1].walkable == true)
+        {
+            Neighbors.Add(main.grid[x, y, z - 1]);
+        }
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.up) && main.grid[x, y + 1, z].walkable == true)
+        {
+            Neighbors.Add(main.grid[x, y + 1, z]);
+        }
+
+        if (rulesets.WithinArray(currentNode.position + Vector3Int.down) && main.grid[x, y - 1, z].walkable == true)
+        {
+            Neighbors.Add(main.grid[x, y - 1, z]);
+        }
+
+        return Neighbors;
+    }
+
+    public bool EmptyCheckX(bool isRight, Vector3Int pos)
+    {
+        int sign;
+
+        if (isRight)
+        {
+            sign = 1;
+        }
+
+        else
+        {
+            sign = -1;
+        }
+
+        if (rulesets.WithinArray(pos + Vector3Int.up) && main.grid[pos.x, pos.y + 1, pos.z].walkable == false)
+        {
+            if (rulesets.WithinArray(pos + Vector3Int.up + new Vector3Int(sign, 0, 0)) && main.grid[pos.x + sign, pos.y + 1, pos.z].walkable == false)
+            {
+                return true;
+            }
+        }
+
+        if (rulesets.WithinArray(pos + Vector3Int.down) && main.grid[pos.x, pos.y - 1, pos.z].walkable == false)
+        {
+            if (rulesets.WithinArray(pos + Vector3Int.down + new Vector3Int(sign, 0, 0)) && main.grid[pos.x + sign, pos.y - 1, pos.z].walkable == false)
+            {
+                return true;
+            }
+        }
+
+        if (rulesets.WithinArray(pos + Vector3Int.RoundToInt(Vector3.forward)) && main.grid[pos.x, pos.y, pos.z + 1].walkable == false)
+        {
+            if (rulesets.WithinArray(pos + Vector3Int.RoundToInt(Vector3.forward) + new Vector3Int(sign, 0, 0)) && main.grid[pos.x + sign, pos.y, pos.z + 1].walkable == false)
+            {
+                return true;
+            }
+        }
+
+        if (rulesets.WithinArray(pos + Vector3Int.RoundToInt(Vector3.back)) && main.grid[pos.x, pos.y, pos.z - 1].walkable == false)
+        {
+            if (rulesets.WithinArray(pos + Vector3Int.RoundToInt(Vector3.back) + new Vector3Int(sign, 0, 0)) && main.grid[pos.x + sign, pos.y, pos.z - 1].walkable == false)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
