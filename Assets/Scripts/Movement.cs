@@ -9,10 +9,12 @@ public class Movement : MonoBehaviour
     RaycastHit raycastHit;
     public GameObject currentMorphBot;
     Selection selection;
-    KeyCode translate;
+    public KeyCode translate;
     Rulesets rulesets;
     Functions functions;
     Pathfinding pathfinding;
+    Main main;
+    public bool isPathfinding;
 
     private void Awake()
     {
@@ -20,13 +22,14 @@ public class Movement : MonoBehaviour
         rulesets = GetComponent<Rulesets>();
         functions = GetComponent<Functions>();
         pathfinding = GetComponent<Pathfinding>();
+        main = GetComponent<Main>();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isPathfinding == false)
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, maxDistance, gameLayers))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, maxDistance, gameLayers) && raycastHit.transform.gameObject.layer == 9)
             {
                 selection.enabled = true;
 
@@ -46,7 +49,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(translate) && currentMorphBot != null)
+        if (Input.GetKeyDown(translate) && currentMorphBot != null && isPathfinding == false)
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out raycastHit, maxDistance, gameLayers))
             {
@@ -54,11 +57,15 @@ public class Movement : MonoBehaviour
 
                 if (rulesets.WithinArray(endLocation))
                 {
-                    // TURN ON LATER pathfinding.FindPath(Vector3Int.RoundToInt(currentMorphBot.transform.position), endLocation);
-
-
+                    isPathfinding = true;
+                    Vector3Int pos = Vector3Int.RoundToInt(currentMorphBot.transform.position);
+                    main.grid[pos.x, pos.y, pos.z].walkable = true;
+                    pathfinding.FindPath(Vector3Int.RoundToInt(currentMorphBot.transform.position), endLocation);
                     // initiate pathfinding so its reusable, also make sure you cant exit modes or use the T key again and that selection
                     // and clicking on blocks cant happen
+                    // also make sure to reset all the Node parents to make sure anything doesnt happen (do this only if find issues)
+
+                    //make the currentNode walkable "true" 
                 }
             }
         }

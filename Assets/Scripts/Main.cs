@@ -39,25 +39,26 @@ public class Main : MonoBehaviour
     // Draws a wired 3D cube in scene view that shows the size of the array
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(new Vector3(x / 2 - 0.5f, y / 2, z / 2 - 0.5f), new Vector3(x, y, z));
+        Gizmos.DrawWireCube(new Vector3(x / 2 - 0.5f, y / 2 - 0.5f, z / 2 - 0.5f), new Vector3(x, y, z));
     }
 
     // Game start - used to display the initial mode when the game runs and initialize grid
     private void Awake()
     {
+        y += 1;
         placement = GetComponent<Placement>();
         removal = GetComponent<Removal>();
         selection = GetComponent<Selection>();
         movement = GetComponent<Movement>();
-        CreatePlatform();
         CreateGrid();
+        CreatePlatform();
         UpdateMode();
     }
 
     // Game update - used for switching between modes
     private void Update()
     {
-        if (Input.GetKeyDown(modeSwitch))
+        if (Input.GetKeyDown(modeSwitch) && movement.isPathfinding == false)
         {
             UpdateMode();
         }
@@ -140,9 +141,10 @@ public class Main : MonoBehaviour
         {
             for (int b = 0; b < z; b++)
             {
-                GameObject platform = Instantiate(platformRef, new Vector3(a, -1, b), Quaternion.identity);
-                platform.name = "Platform(" + a + ", -1, " + b + ")";
+                GameObject platform = Instantiate(platformRef, new Vector3(a, 0, b), Quaternion.identity);
+                platform.name = "Platform(" + a + ", 0, " + b + ")";
                 platform.transform.SetParent(platformPar.transform);
+                grid[a, 0, b].walkable = false;
             }
         }
     }

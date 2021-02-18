@@ -25,6 +25,10 @@ public class Node
         }
     }
 
+
+    // Parent Node used in pathfinding to backtrack
+    public Node parent;
+
     // Used in 'Main' script to alter position and walkable variables
     public Node(Vector3Int _position, bool _walkable)
     {

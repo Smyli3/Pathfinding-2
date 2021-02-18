@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17824757, g: 0.13108832, b: 0.31348634, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 189195454}
   - component: {fileID: 189195455}
   - component: {fileID: 189195456}
+  - component: {fileID: 189195457}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -206,9 +207,9 @@ MonoBehaviour:
   modeText: {fileID: 1846713079}
   placementMode: {r: 1, g: 1, b: 1, a: 1}
   movementMode: {r: 0.80139136, g: 0.5424528, b: 1, a: 1}
-  x: 8
+  x: 10
   y: 5
-  z: 8
+  z: 10
   platformRef: {fileID: 2996762592325334026, guid: 5e55d78c1b0511d41801603574153295,
     type: 3}
   platformPar: {fileID: 1309464610}
@@ -310,6 +311,8 @@ MonoBehaviour:
     m_Bits: 768
   maxDistance: 25
   currentMorphBot: {fileID: 0}
+  translate: 116
+  isPathfinding: 0
 --- !u!114 &189195456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +325,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dafe5f233dbf824d907111d2bcfb0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasFoundPath: 0
+--- !u!114 &189195457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189195447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb126381792ed74ead1488f71ebb924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialTimer: 0.3
+  index: 0
+  tempPos: {x: 0, y: 0, z: 0}
 --- !u!1 &603636031
 GameObject:
   m_ObjectHideFlags: 0
