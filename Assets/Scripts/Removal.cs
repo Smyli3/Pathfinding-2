@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class Removal : MonoBehaviour
 {
+    // the current MorphBot that can be deleted
     GameObject currentMorphBot;
+
+    // The game layers (platform, MorphBot)
     public LayerMask gameLayers;
+
+    // Results of Raycast if it was successful
     RaycastHit raycastHit;
+
+    // Raycast max distance
     public int maxRaycastDistance;
+
+    // Reference to main script
     Main main;
 
+    // Sets the main script during runtime so that it can be used with this script.
     private void Awake()
     {
         main = GetComponent<Main>();
@@ -25,13 +35,14 @@ public class Removal : MonoBehaviour
                 currentMorphBot = raycastHit.transform.gameObject;
             }
 
-            // Sets currentMorphBot to null if no cube is detected
+            // Sets currentMorphBot to null if no cube is detected (meaning the mouse directly sees a platform instead, which cannot be deleted).
             else
             {
                 currentMorphBot = null;
             }
         }
 
+        // Sets currentMorphBot to null because no platform OR MorphBot was detected.
         else
         {
             currentMorphBot = null;

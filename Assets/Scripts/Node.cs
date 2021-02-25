@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Node
 {
+    // This is a class that is used for the "grid" multidimensional array, referencing every Vector3Int location in that grid.
+
     // Position of Node
     public Vector3Int position;
     
@@ -29,7 +31,7 @@ public class Node
     // Parent Node used in pathfinding to backtrack
     public Node parent;
 
-    // Used in 'Main' script to alter position and walkable variables
+    // Constructable used in 'Main' script to alter position and walkable variables
     public Node(Vector3Int _position, bool _walkable)
     {
         position = _position;

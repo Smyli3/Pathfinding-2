@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
+    // Main script that handles the main core of the game
+
     // Initialize the 'mode' enum, which will be used to update the script accordingly
     public enum mode {move, place}
 
@@ -19,7 +21,7 @@ public class Main : MonoBehaviour
     public Color placementMode;
     public Color movementMode;
 
-    // Grid
+    // Grid specifications and the grid itself that can be set in the inspector.
     public Node[,,] grid;
     public int x;
     public int y;

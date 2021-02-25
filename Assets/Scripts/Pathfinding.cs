@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
 {
+    // References other scripts
     Main main;
     Functions functions;
     Movement movement;
     PathMovement pathMovement;
+
+    // Stores every Node in order if a path is found
     public List<Node> pathfinder;
+
+    // Returns true or false depending on whether a path was found
     public bool hasFoundPath;
 
+    // Sets reference script variables
     private void Awake()
     {
         main = GetComponent<Main>();
@@ -18,9 +24,10 @@ public class Pathfinding : MonoBehaviour
         movement = GetComponent<Movement>();
         pathMovement = GetComponent<PathMovement>();
     }
+
+    // A lot of this is hard to explain, but the code is pretty much identical to the A* video by Sebastian Lague (part 3)
     public void FindPath(Vector3Int startPos, Vector3Int endPos)
     {
-        // try clearing pathfinder if have issues
         hasFoundPath = false;
         Node startNode = main.grid[startPos.x, startPos.y, startPos.z];
         Node endNode = main.grid[endPos.x, endPos.y, endPos.z];
@@ -78,18 +85,18 @@ public class Pathfinding : MonoBehaviour
             }
         }
 
+        // If no path has been found, then things are changed as accordingly.
+        // isPathfinding is set to false once again, meaning the user can input a new location to test.
+        // The starting Node is now walkable again because it is not going to move, meaning it will be occupied.
         if (!hasFoundPath)
         {
             Debug.Log("PATH NOT FOUND");
             movement.isPathfinding = false;
             main.grid[startPos.x, startPos.y, startPos.z].walkable = false;
-
-            // make node position of currentMorphBot unwalkable
-            // make it so that you pathfind again (enable the necessary scripts)
-            // possibly display a message.
         }
     }
 
+    // Calculates the movement cost to a given Node.
     private int CalculateCost(Node nodeA, Node nodeB)
     {
         Vector3Int posA = nodeA.position;
@@ -102,6 +109,8 @@ public class Pathfinding : MonoBehaviour
         return xCost + yCost + zCost;
     }
 
+    // Retraces a path once we have confirmed there is one.
+    // Sets pathfinder so that we can start moving.
     private void RetracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
