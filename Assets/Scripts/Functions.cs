@@ -276,7 +276,7 @@ public class Functions : MonoBehaviour
                 return true;
             }
         }
-
+        //wouldn't this make it become false regardless of the above code?
         return false;
     }
 }
