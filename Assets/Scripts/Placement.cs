@@ -1,4 +1,5 @@
-﻿using System.Collections;
+//Uses basic three in addition to System which allows for reference data types, events and event handlers, interfaces, attributes, and processing exceptions.
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
