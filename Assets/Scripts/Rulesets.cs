@@ -1,4 +1,5 @@
-﻿using System.Collections;
+//Uses the basic three.
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
